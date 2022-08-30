@@ -1,16 +1,26 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import requests
+from bs4 import BeautifulSoup
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def get_html(url):
+    result = requests.get(url)
+    return result.text
 
 
-# Press the green button in the gutter to run the script.
+def get_data(html):
+    soup = BeautifulSoup(html, 'lxml')
+    section = soup.findAll('section', {'class': 'plugin-section'})[1]
+    plugins = section.findAll('article')
+    for plugin in plugins:
+        h2 = plugin.find('h2')
+        rating = plugin.find('span', {'class': 'rating-count'})
+        print(h2.text, rating.text)
+
+
+def main():
+    html = get_html('https://ru.wordpress.org/plugins/')
+    data = get_data(html)
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
