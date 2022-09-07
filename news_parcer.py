@@ -23,6 +23,8 @@ soup = BeautifulSoup(response.content, 'html.parser')
 
 posts =[]
 
+pprint.pprint(soup)
+
 pages = soup.find_all('div', class_='wp-block-post-date has-small-font-size')
 # обрабатываем данные первой страницы (она же главаная страница сайта)
 
@@ -47,8 +49,11 @@ print('Всего публикаций '+str(len(posts)))
 for post in posts:
     print(post[0], post[1])
 
-with open('parced_data.txt', 'w') as datafile:
+with open('parced_data.json', 'w') as datafile:
     json.dump(posts, datafile)
+
+
+
 
 
 
