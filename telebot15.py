@@ -31,7 +31,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    message_txt = """Вас приветсвует telbot15. \nКоманды: \n/review - обзор публикаций \n/view ДАТА - публикации на ДАТУ \n/header ДАТА - заголовки на ДАТУ"""
+    message_txt = """Вас приветсвует telbot15. \nКоманды: \n/review - обзор публикаций \n/view ДАТА - публикации на ДАТУ \n/headers ДАТА - заголовки на ДАТУ"""
     bot.send_message(message.chat.id, message_txt)
 
 
